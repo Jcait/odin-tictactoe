@@ -1,10 +1,26 @@
 const game = (function() {
+
+    // create players
+    const createPlayer = ({name,sign,points, moves}) => ({
+        name,
+        sign,
+        points,
+        moves
+    })
+
+    const playerOne = createPlayer({
+        name: "test",
+        sign: "X",
+        points: 0,
+        moves: []
+    })
     const gameBoard = [ "X","","",
                         "X","X","",
                         "","",""]
-    const _playerOne = "X"
-    const _playerTwo = "O"
+
     let _currentTurn
+
+
 
     function gameStart() {
         const result = Math.floor(Math.random() *10 )
@@ -13,24 +29,25 @@ const game = (function() {
     }
     function playerTurn(result) {
         if(result % 2 == 0) {
-            _currentTurncurrentTurn = _playerOne
+            _currentTurn = playerOne
         } else {
-            _currentTurn = _playerTwo
-        }
+
+        return "test" }
 
     }
 
-
-
     function addSign(i) {
-        gameBoard[i] = _currentTurn
+        console.log(_currentTurn)
+        gameBoard[i] = _currentTurn.sign
+        _currentTurn.moves.push(i)
     }
 
 
     return {
         gameBoard,
+        playerOne,
         gameStart,
-        addSign
+        addSign, 
     }
 
 })()
