@@ -66,12 +66,12 @@ function setTurn(player) {
         gameBoard[i] = _currentTurn.sign
         _currentTurn.moves.push(i)
         console.log(_currentTurn.moves)
-        winCheck(_currentTurn.moves)
+        winCheck(_currentTurn)
         changeTurn(_currentTurn)
     }
 
     const winCheck = (arr) => {
-        console.log(`checking win ${arr}`)
+        console.log(`checking win ${arr.moves}`)
         const winMoves = [[0,1,2], [0,3,6], [0,4,8],
         [1,4,7], [2,4,6], [2,5,8],
         [6,7,8]]
@@ -79,11 +79,16 @@ function setTurn(player) {
         for(let i = 0; i < winMoves.length; i++) {
             console.log(arr)
             console.log(winMoves[i])
-            if(winMoves[i].every(val => arr.includes(val))) {
+            if(winMoves[i].every(val => arr.moves.includes(val))) {
                 console.log("winner")
+                declareWinner(arr)
                 return
             } 
         }   
+    }
+
+    function declareWinner(player) {
+        alert(`${player.name} has won the round`)
     }
 
     function changeTurn(_currentTurn) {
