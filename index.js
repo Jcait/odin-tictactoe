@@ -35,9 +35,25 @@ function setTurn(player) {
     _currentTurn = player
 
 }
+
+// DOM cache
+
+    const btn = document.querySelectorAll("button")
+
+    // buttons
+    function setBtn(btn){
+            btn.forEach(button => {
+            button.addEventListener("click", () => {
+            console.log("boop")
+            })
+        })
+    }
+
+
 // Starts game and randomly selects starting player
 
     function gameStart() {
+        setBtn(btn)
         const result = Math.floor(Math.random() *10 )
         playerTurn(result)
     }
@@ -109,7 +125,7 @@ function setTurn(player) {
         gameStart,
         play,
         _currentTurn,
-        playerTwo
+        btn,
     }
 
 })()
