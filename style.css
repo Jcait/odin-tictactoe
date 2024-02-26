@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+}
+
+.container {
+    height: 90vh;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    height: 10vh;
+}
+
+.board {
+    height: 100%;
+    width: 50%;
+    background-color: lightgray;
+}

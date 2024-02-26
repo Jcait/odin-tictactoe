@@ -14,14 +14,14 @@ const game = (function() {
         name: "test",
         sign: "X",
         points: 0,
-        moves: [0,1]
+        moves: []
     })
 
     const playerTwo = createPlayer({
         name: "test2",
         sign: "O",
         points: 0,
-        moves: [0,1]
+        moves: [4,8,4]
     })
     const gameBoard = [ "","","",
                         "","","",
@@ -86,6 +86,7 @@ function setTurn(player) {
             } 
         }   
     }
+    
 
     function declareWinner(player) {
         alert(`${player.name} has won the round`)
@@ -108,7 +109,7 @@ function setTurn(player) {
         gameStart,
         play,
         _currentTurn,
-        playerOne
+        playerTwo
     }
 
 })()
