@@ -40,20 +40,24 @@ function setTurn(player) {
 
     const btn = document.querySelectorAll("button")
 
+
     // buttons
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
             // button.parentNode.innerText="boop"
-            testboop(button.children[0])
+            testboop(button)
             })
         })
     }
 
     function testboop(btn) {
+        const img = document.createElement("img")
         console.log(_currentTurn)
         console.log(btn)
-        btn.src="testcat.jpg"
+        btn.append(img)
+        img.src= "testcat.jpg"
+
     }
 
 
