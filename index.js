@@ -44,7 +44,7 @@ function setTurn(player) {
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
-            console.log("boop")
+            button.parentNode.innerText="boop"
             })
         })
     }
