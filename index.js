@@ -44,9 +44,16 @@ function setTurn(player) {
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
-            button.parentNode.innerText="boop"
+            // button.parentNode.innerText="boop"
+            testboop(button.nextElementSibling)
             })
         })
+    }
+
+    function testboop(btn) {
+        console.log(_currentTurn)
+        console.log(btn)
+        btn.src = "testcat.jpg"
     }
 
 
