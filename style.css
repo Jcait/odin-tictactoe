@@ -3,37 +3,39 @@ body {
 }
 
 .container {
-    height: 90vh;
-    background-color: lightblue;
+    height: 85vh;
+    background-color: #cbd9f2;
     display: flex;
     justify-content: center;
 }
 
 .header {
-    height: 10vh;
+    height: 15vh;
+    background: #a8c2e8
 }
 
 .board {
     height: auto;
     width: 50%;
-    background-color: lightgray;
+    background-color: #cbd9f2;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    padding: 24px;
 }
 
 .c {
-    border: solid 6px black;
+    border: solid 6px #7ea2dc;
 }
 
 .cl, .cr {
-    border-top: solid 6px black;
-    border-bottom: solid 6px black;
+    border-top: solid 6px #7ea2dc;
+    border-bottom: solid 6px #7ea2dc;
 }
 
 .tc, .bc {
-    border-left: solid 6px black;
-    border-right: solid 6px black;
+    border-left: solid 6px #7ea2dc;
+    border-right: solid 6px #7ea2dc;
 }
 
 button {
@@ -49,4 +51,9 @@ button {
 img {
     height: 80%;
     width: 80%;
+}
+
+.left-container, .right-container {
+    width: 25%;
+    background: #e2eaf7
 }
