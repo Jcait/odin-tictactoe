@@ -39,73 +39,92 @@ function setTurn(player) {
 // DOM cache
 
     const btn = document.querySelectorAll("button")
+    const img = document.querySelector("img")
 
 
     // buttons
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
+                imgCheck(button)
                 const gridSpace = button.parentNode.className
                 console.log(gridSpace)
                 
-                gridCheck((gridSpace))
+                gridCheck(gridSpace)
             // button.parentNode.innerText="boop"
-            winCheck(_currentTurn)
-            testboop(button)
+
+                render(button)
+                winCheck(_currentTurn)
+
+
             })
         })
     }
 
+    function imgCheck(btn) {
+        console.log(btn.contains(img))
+    }
+
     function gridCheck(gridSpace) {
+        let i
         switch (true) {
             case gridSpace.includes("zero"):
-                _currentTurn.moves.push(0)
+                i = 0
+                play(i)
                 console.log("zero")
                 break;
 
             case gridSpace.includes("one"):
-                _currentTurn.moves.push(1)
+                i = 1
+                play(i)
                 console.log("one")
                 break;
 
             case gridSpace.includes("two"):
-                _currentTurn.moves.push(2)
+                i = 2
+                play(i)
                 console.log("two")
                 break;
 
             case gridSpace.includes("three"):
-                _currentTurn.moves.push(3)
+                i = 3
+                play(i)
                 console.log("three")
                 break;
 
             case gridSpace.includes("four"):
-               _currentTurn.moves.push(4)
+                i = 4
+                play(i)
                console.log("four")
                break;
 
             case gridSpace.includes("five"):
-                _currentTurn.moves.push(5)
+                i = 5
+                play(i)
                 console.log("five")
                 break;
 
             case gridSpace.includes("six"):
-                _currentTurn.moves.push(6)
+                i = 6
+                play(i)
                 console.log("six")
                 break;
 
             case gridSpace.includes("seven"):
-                _currentTurn.moves.push(7)
+                i = 7
+                play(i)
                 console.log("seven")
 
             case gridSpace.includes("eight"):
-                _currentTurn.moves.push(8)
+                i = 8
+                play(i)
                 console.log("eight")
         }
 
 
     }
 
-    function testboop(btn) {
+    function render(btn) {
         const img = document.createElement("img")
         console.log(_currentTurn)
         console.log(btn)
@@ -146,17 +165,17 @@ function setTurn(player) {
         && _currentTurn.sign) {
             console.log("This spot is taken")
         } else {
+            
             addSign(_currentTurn, i)
         }
     }
 
-    // function addSign(_currentTurn,i) {
-    //     gameBoard[i] = _currentTurn.sign
-    //     _currentTurn.moves.push(i)
-    //     console.log(_currentTurn.moves)
-    //     winCheck(_currentTurn)
-    //     changeTurn(_currentTurn)
-    // }
+    function addSign(_currentTurn,i) {
+        gameBoard[i] = _currentTurn.sign
+        _currentTurn.moves.push(i)
+        console.log(_currentTurn.moves)
+
+    }
 
     const winCheck = (arr) => {
         console.log(`checking win ${arr.moves}`)
@@ -165,8 +184,7 @@ function setTurn(player) {
         [6,7,8]]
     
         for(let i = 0; i < winMoves.length; i++) {
-            console.log(arr)
-            console.log(winMoves[i])
+
             if(winMoves[i].every(val => arr.moves.includes(val))) {
                 console.log("winner")
                 declareWinner(arr)
