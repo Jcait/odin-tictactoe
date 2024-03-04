@@ -41,28 +41,31 @@ function setTurn(player) {
     const btn = document.querySelectorAll("button")
     const img = document.querySelector("img")
 
-
     // buttons
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
-                imgCheck(button)
                 const gridSpace = button.parentNode.className
                 console.log(gridSpace)
                 
                 gridCheck(gridSpace)
             // button.parentNode.innerText="boop"
 
-                render(button)
-                winCheck(_currentTurn)
+                renderCheck(button)
+            
 
 
             })
         })
     }
 
-    function imgCheck(btn) {
-        console.log(btn.contains(img))
+    function renderCheck(btn) {
+        if(btn.hasChildNodes()) {
+            return
+        } else {
+            render(btn)
+            
+        }
     }
 
     function gridCheck(gridSpace) {
@@ -132,12 +135,10 @@ function setTurn(player) {
         console.log(_currentTurn.sign)
         if(_currentTurn.sign == "O") {
             img.src = "testcat2.jpg"
-            changeTurn(_currentTurn)
+
         } else if (_currentTurn.sign == "X"){
             img.src= "testcat.jpg"
-            changeTurn(_currentTurn)
         }
-
     }
 
 
@@ -174,10 +175,13 @@ function setTurn(player) {
         gameBoard[i] = _currentTurn.sign
         _currentTurn.moves.push(i)
         console.log(_currentTurn.moves)
+        winCheck(_currentTurn)
+        changeTurn(_currentTurn)
 
     }
 
     const winCheck = (arr) => {
+        console.log(`checking win ${arr.name}`)
         console.log(`checking win ${arr.moves}`)
         const winMoves = [[0,1,2], [0,3,6], [0,4,8],
         [1,4,7], [2,4,6], [2,5,8],
