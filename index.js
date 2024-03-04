@@ -45,27 +45,34 @@ function setTurn(player) {
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
+                const gridSpace = button.parentNode.className
+                console.log(gridSpace)
+                switch(true) {
+                    case gridSpace.includes("tic"):
+                        console.log("true")
+                        _currentTurn.moves.push(0)
+                }
             // button.parentNode.innerText="boop"
-            testboop(button)
+            // testboop(button)
             })
         })
     }
 
-    function testboop(btn) {
-        const img = document.createElement("img")
-        console.log(_currentTurn)
-        console.log(btn)
-        btn.append(img)
-        console.log(_currentTurn.sign)
-        if(_currentTurn.sign == "O") {
-            img.src = "testcat2.jpg"
-            changeTurn(_currentTurn)
-        } else if (_currentTurn.sign == "X"){
-            img.src= "testcat.jpg"
-            changeTurn(_currentTurn)
-        }
+    // function testboop(btn) {
+    //     const img = document.createElement("img")
+    //     console.log(_currentTurn)
+    //     console.log(btn)
+    //     btn.append(img)
+    //     console.log(_currentTurn.sign)
+    //     if(_currentTurn.sign == "O") {
+    //         img.src = "testcat2.jpg"
+    //         changeTurn(_currentTurn)
+    //     } else if (_currentTurn.sign == "X"){
+    //         img.src= "testcat.jpg"
+    //         changeTurn(_currentTurn)
+    //     }
 
-    }
+    // }
 
 
 // Starts game and randomly selects starting player
@@ -140,6 +147,7 @@ function setTurn(player) {
     return {
         gameBoard,
         playerOne,
+        playerTwo,
         gameStart,
         play,
         _currentTurn,
