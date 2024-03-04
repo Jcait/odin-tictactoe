@@ -81,3 +81,13 @@ input {
 input :focus {
     outline: none;
 }
+
+.ready {
+    color: #e2eaf7;
+    margin-top: 24px;
+    width: 50%;
+    height: 10%;
+    border: 2px solid #334075;
+    background: #334075;
+    font-size: 1rem;
+}

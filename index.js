@@ -1,4 +1,7 @@
+const pageSetup = (function() {
 
+
+})
 
 const game = (function() {
 
@@ -40,6 +43,8 @@ function setTurn(player) {
 
     const btn = document.querySelectorAll("button")
     const img = document.querySelector("img")
+    const rdyBtn = document.querySelector(".ready")
+    const input = document.querySelector(".input")
 
     // buttons
     function setBtn(btn){
