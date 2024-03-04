@@ -56,7 +56,14 @@ function setTurn(player) {
         console.log(_currentTurn)
         console.log(btn)
         btn.append(img)
-        img.src= "testcat.jpg"
+        console.log(_currentTurn.sign)
+        if(_currentTurn.sign == "O") {
+            img.src = "testcat2.jpg"
+            changeTurn(_currentTurn)
+        } else if (_currentTurn.sign == "X"){
+            img.src= "testcat.jpg"
+            changeTurn(_currentTurn)
+        }
 
     }
 
