@@ -21,7 +21,7 @@ const game = (function() {
         name: "test2",
         sign: "O",
         points: 0,
-        moves: [4,8,4]
+        moves: []
     })
     const gameBoard = [ "","","",
                         "","","",
@@ -47,32 +47,79 @@ function setTurn(player) {
             button.addEventListener("click", () => {
                 const gridSpace = button.parentNode.className
                 console.log(gridSpace)
-                switch(true) {
-                    case gridSpace.includes("tic"):
-                        console.log("true")
-                        _currentTurn.moves.push(0)
-                }
+                
+                gridCheck((gridSpace))
             // button.parentNode.innerText="boop"
-            // testboop(button)
+            winCheck(_currentTurn)
+            testboop(button)
             })
         })
     }
 
-    // function testboop(btn) {
-    //     const img = document.createElement("img")
-    //     console.log(_currentTurn)
-    //     console.log(btn)
-    //     btn.append(img)
-    //     console.log(_currentTurn.sign)
-    //     if(_currentTurn.sign == "O") {
-    //         img.src = "testcat2.jpg"
-    //         changeTurn(_currentTurn)
-    //     } else if (_currentTurn.sign == "X"){
-    //         img.src= "testcat.jpg"
-    //         changeTurn(_currentTurn)
-    //     }
+    function gridCheck(gridSpace) {
+        switch (true) {
+            case gridSpace.includes("zero"):
+                _currentTurn.moves.push(0)
+                console.log("zero")
+                break;
 
-    // }
+            case gridSpace.includes("one"):
+                _currentTurn.moves.push(1)
+                console.log("one")
+                break;
+
+            case gridSpace.includes("two"):
+                _currentTurn.moves.push(2)
+                console.log("two")
+                break;
+
+            case gridSpace.includes("three"):
+                _currentTurn.moves.push(3)
+                console.log("three")
+                break;
+
+            case gridSpace.includes("four"):
+               _currentTurn.moves.push(4)
+               console.log("four")
+               break;
+
+            case gridSpace.includes("five"):
+                _currentTurn.moves.push(5)
+                console.log("five")
+                break;
+
+            case gridSpace.includes("six"):
+                _currentTurn.moves.push(6)
+                console.log("six")
+                break;
+
+            case gridSpace.includes("seven"):
+                _currentTurn.moves.push(7)
+                console.log("seven")
+
+            case gridSpace.includes("eight"):
+                _currentTurn.moves.push(8)
+                console.log("eight")
+        }
+
+
+    }
+
+    function testboop(btn) {
+        const img = document.createElement("img")
+        console.log(_currentTurn)
+        console.log(btn)
+        btn.append(img)
+        console.log(_currentTurn.sign)
+        if(_currentTurn.sign == "O") {
+            img.src = "testcat2.jpg"
+            changeTurn(_currentTurn)
+        } else if (_currentTurn.sign == "X"){
+            img.src= "testcat.jpg"
+            changeTurn(_currentTurn)
+        }
+
+    }
 
 
 // Starts game and randomly selects starting player
@@ -103,13 +150,13 @@ function setTurn(player) {
         }
     }
 
-    function addSign(_currentTurn,i) {
-        gameBoard[i] = _currentTurn.sign
-        _currentTurn.moves.push(i)
-        console.log(_currentTurn.moves)
-        winCheck(_currentTurn)
-        changeTurn(_currentTurn)
-    }
+    // function addSign(_currentTurn,i) {
+    //     gameBoard[i] = _currentTurn.sign
+    //     _currentTurn.moves.push(i)
+    //     console.log(_currentTurn.moves)
+    //     winCheck(_currentTurn)
+    //     changeTurn(_currentTurn)
+    // }
 
     const winCheck = (arr) => {
         console.log(`checking win ${arr.moves}`)
