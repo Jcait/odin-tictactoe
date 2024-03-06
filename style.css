@@ -20,7 +20,26 @@ body {
 
 .header {
     height: 15vh;
-    background: #a8c2e8
+    background: #a8c2e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.start, .reset {
+    width: 20%;
+    height:60%;
+    border: 2px solid #334075;
+    background: #334075;
+    font-size: 1rem;
+    border-radius: 6px;
+    color: #cbd9f2;
+    margin: 10px;
 }
 
 .board {
@@ -99,3 +118,4 @@ button:disabled {
     color: #334075 ;
     cursor: not-allowed;
 }
+

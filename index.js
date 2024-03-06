@@ -46,6 +46,7 @@ function setTurn(player) {
     const rdyBtn = document.querySelectorAll(".ready")
     const input = document.querySelector(".input")
     const board = document.querySelector(".board")
+    const startBtn = document.querySelector(".start")
 
 
     // buttons
@@ -68,6 +69,13 @@ function setTurn(player) {
 
     function gameSetup() {
         gameButton(rdyBtn)
+        btnStart(startBtn)
+    }
+    
+    function btnStart(startBtn) {
+        startBtn.addEventListener("click", () => {
+            gameStart()
+        })
     }
 
     function gameButton(rdyBtn) {
