@@ -1,7 +1,4 @@
-const pageSetup = (function() {
 
-
-})
 
 const game = (function() {
 
@@ -14,14 +11,14 @@ const game = (function() {
     })
 
     const playerOne = createPlayer({
-        name: "test",
+        name: "",
         sign: "X",
         points: 0,
         moves: []
     })
 
     const playerTwo = createPlayer({
-        name: "test2",
+        name: "",
         sign: "O",
         points: 0,
         moves: []
@@ -36,7 +33,20 @@ let  _currentTurn
 
 function setTurn(player) {
     _currentTurn = player
+    announce(player.name)
 
+}
+
+let winner = false
+
+let count = 0
+
+function drawCheck() {
+    if(winner == false && 
+        count == 9) {
+           head.innerText = `The Game is a tie, please reset the board.`
+           resetBtn.disabled = false
+        }
 }
 
 // DOM cache
@@ -47,24 +57,32 @@ function setTurn(player) {
     const input = document.querySelector(".input")
     const board = document.querySelector(".board")
     const startBtn = document.querySelector(".start")
+    const header = document.querySelector(".header")
+    const head =  header.querySelector("h1")
+    const resetBtn = document.querySelector(".reset")
 
 
     // buttons
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
+                count++
                 const gridSpace = button.parentNode.className
                 console.log(_currentTurn)
                 renderCheck(button)
                  gridCheck(gridSpace)
-            // button.parentNode.innerText="boop"
-
-
-            
-
+                 drawCheck()
 
             })
         })
+    }
+
+    function announce(name) {
+       const head = header.querySelector("h1")
+       if(winner) {
+        head.innerText =`${name} is the winner`
+       }
+       head.innerText = `It is ${name}'s turn`
     }
 
     function gameSetup() {
@@ -74,8 +92,19 @@ function setTurn(player) {
     
     function btnStart(startBtn) {
         startBtn.addEventListener("click", () => {
-            gameStart()
+            nameCheck(startBtn)
+            
         })
+    }
+
+    function nameCheck(startBtn) {
+        if(playerOne.name == "" 
+        || playerTwo.name == "") {
+            alert("Please fill in both names")
+        } else {
+            gameStart()
+            disableButton(startBtn)
+        }
     }
 
     function gameButton(rdyBtn) {
@@ -241,27 +270,34 @@ function setTurn(player) {
         for(let i = 0; i < winMoves.length; i++) {
 
             if(winMoves[i].every(val => arr.moves.includes(val))) {
-                declareWinner(arr)
+                console.log("winner")
+                setWinner()
+                head.innerText = `${arr.name} has won the round`
                 const boardBtn = board.querySelectorAll("button")
-                console.log(boardBtn)
                 boardBtn.forEach(btn => disableButton(btn))
                 return
             } 
         }   
     }
+
+    function setWinner() {
+        winner = true
+    }
     
 
-    function declareWinner(player) {
-        alert(`${player.name} has won the round`)
-    }
+
 
     function changeTurn(_currentTurn) {
-        console.log("changeturn")
-        if(_currentTurn == playerOne) {
+        if(winner) {
+            return
+        } else {
+                    if(_currentTurn == playerOne) {
             setTurn(playerTwo)
         } else {
             setTurn(playerOne)
         }
+        }
+
     }
 
 
@@ -273,7 +309,8 @@ function setTurn(player) {
         play,
         _currentTurn,
         btn,
-        gameSetup
+        gameSetup,
+        winner,
     }
 
 })()
