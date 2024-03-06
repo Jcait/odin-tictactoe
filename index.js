@@ -43,8 +43,9 @@ function setTurn(player) {
 
     const btn = document.querySelectorAll("button")
     const img = document.querySelector("img")
-    const rdyBtn = document.querySelector(".ready")
+    const rdyBtn = document.querySelectorAll(".ready")
     const input = document.querySelector(".input")
+
 
     // buttons
     function setBtn(btn){
@@ -52,14 +53,38 @@ function setTurn(player) {
             button.addEventListener("click", () => {
                 const gridSpace = button.parentNode.className
                 console.log(_currentTurn)
-                gridCheck(gridSpace)
                 renderCheck(button)
+                 gridCheck(gridSpace)
             // button.parentNode.innerText="boop"
 
 
             
 
 
+            })
+        })
+    }
+
+    function gameSetup() {
+        gameButton(rdyBtn)
+    }
+
+    function gameButton(rdyBtn) {
+        rdyBtn.forEach(button => {
+            button.addEventListener("click", () => {
+                let playerHeader = button.parentNode.querySelector("h1")
+                const nameInput = button.parentNode.querySelector("input")
+                console.log(playerHeader)
+                if(nameInput.className.includes("player-one") 
+                    && nameInput.value != "") {
+                        playerHeader.innerText = nameInput.value
+                        playerOne.name = nameInput.value
+                } else if(nameInput.className.includes("player-two")
+                    && nameInput.value != "") {
+                        playerHeader.innerText = nameInput.value
+                        playerTwo.name = nameInput.value
+                }
+                
             })
         })
     }
@@ -129,7 +154,6 @@ function setTurn(player) {
                 play(i)
                 console.log("eight")
                 break;
-                
         }
 
 
@@ -224,6 +248,8 @@ function setTurn(player) {
         play,
         _currentTurn,
         btn,
+        gameSetup
     }
 
 })()
+game.gameSetup()
