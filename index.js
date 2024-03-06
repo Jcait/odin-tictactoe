@@ -75,18 +75,29 @@ function setTurn(player) {
                 let playerHeader = button.parentNode.querySelector("h1")
                 const nameInput = button.parentNode.querySelector("input")
                 console.log(playerHeader)
-                if(nameInput.className.includes("player-one") 
-                    && nameInput.value != "") {
-                        playerHeader.innerText = nameInput.value
-                        playerOne.name = nameInput.value
-                } else if(nameInput.className.includes("player-two")
-                    && nameInput.value != "") {
-                        playerHeader.innerText = nameInput.value
-                        playerTwo.name = nameInput.value
+                nameSetter(playerHeader, nameInput)
+                if(nameInput.value) {
+                    disableButton(button)
                 }
                 
             })
         })
+    }
+
+    function nameSetter(playerHeader, nameInput) {
+        if(nameInput.className.includes("player-one") 
+        && nameInput.value != "") {
+                playerHeader.innerText = nameInput.value
+                playerOne.name = nameInput.value
+        } else if(nameInput.className.includes("player-two")
+            && nameInput.value != "") {
+                playerHeader.innerText = nameInput.value
+                playerTwo.name = nameInput.value
+        }
+    }
+
+    function disableButton(button) {
+        button.disabled = true
     }
 
     function renderCheck(btn) {
