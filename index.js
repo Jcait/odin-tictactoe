@@ -294,7 +294,7 @@ function reset() {
             if(winMoves[i].every(val => playMoves.includes(val))) {
                 console.log("winner")
                 setWinner()
-                head.innerText = `${arr.name} has won the round`
+                head.innerText = `${arr.name} has won the round (Please refresh the page)`
                 const boardBtn = board.querySelectorAll("button")
                 boardBtn.forEach(btn => disableButton(btn))
                 return
@@ -324,15 +324,7 @@ function reset() {
 
 
     return {
-        gameBoard,
-        playerOne,
-        playerTwo,
-        gameStart,
-        play,
-        _currentTurn,
-        btn,
         gameSetup,
-        winner,
     }
 
 })()
