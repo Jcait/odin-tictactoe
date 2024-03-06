@@ -23,7 +23,7 @@ const game = (function() {
         points: 0,
         moves: []
     })
-    const gameBoard = [ "","","",
+    let gameBoard = [ "","","",
                         "","","",
                         "","",""]
                         // ["0","1","2",
@@ -45,16 +45,16 @@ function drawCheck() {
     if(winner == false && 
         count == 9) {
            head.innerText = `The Game is a tie, please reset the board.`
+           console.log("reset")
            resetBtn.disabled = false
+           resetButton(resetBtn)
         }
 }
 
 // DOM cache
 
     const btn = document.querySelectorAll("button")
-    const img = document.querySelector("img")
     const rdyBtn = document.querySelectorAll(".ready")
-    const input = document.querySelector(".input")
     const board = document.querySelector(".board")
     const startBtn = document.querySelector(".start")
     const header = document.querySelector(".header")
@@ -66,7 +66,6 @@ function drawCheck() {
     function setBtn(btn){
             btn.forEach(button => {
             button.addEventListener("click", () => {
-                count++
                 const gridSpace = button.parentNode.className
                 console.log(_currentTurn)
                 renderCheck(button)
@@ -122,7 +121,29 @@ function drawCheck() {
         })
     }
 
+    function resetButton(resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            reset()
+            clearBoard(board)
+        })
+        }
 
+
+
+// Everything else
+function clearBoard(board) {
+    boardSquare = board.querySelectorAll("button")
+    boardSquare.forEach(img => img.querySelector("img").remove())
+    changeTurn(_currentTurn)
+
+}
+function reset() {
+    playerOne.moves = []
+    playerTwo.moves = []
+    gameBoard = [ "","","",
+                 "","","",
+                 "","",""]
+}
 
     function nameSetter(playerHeader, nameInput) {
         if(nameInput.className.includes("player-one") 
@@ -246,7 +267,7 @@ function drawCheck() {
         && _currentTurn.sign) {
             console.log("This spot is taken")
         } else {
-            
+            count++
             addSign(_currentTurn, i)
         }
     }
@@ -262,6 +283,7 @@ function drawCheck() {
     }
 
     const winCheck = (arr) => {
+        const playMoves = arr.moves.sort()
         console.log("wincheck")
         const winMoves = [[0,1,2], [0,3,6], [0,4,8],
         [1,4,7], [2,4,6], [2,5,8],[3,4,5],
@@ -269,7 +291,7 @@ function drawCheck() {
     
         for(let i = 0; i < winMoves.length; i++) {
 
-            if(winMoves[i].every(val => arr.moves.includes(val))) {
+            if(winMoves[i].every(val => playMoves.includes(val))) {
                 console.log("winner")
                 setWinner()
                 head.innerText = `${arr.name} has won the round`
