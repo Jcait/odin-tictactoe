@@ -51,12 +51,12 @@ function setTurn(player) {
             btn.forEach(button => {
             button.addEventListener("click", () => {
                 const gridSpace = button.parentNode.className
-                console.log(gridSpace)
-                
+                console.log(_currentTurn)
                 gridCheck(gridSpace)
+                renderCheck(button)
             // button.parentNode.innerText="boop"
 
-                renderCheck(button)
+
             
 
 
@@ -122,11 +122,14 @@ function setTurn(player) {
                 i = 7
                 play(i)
                 console.log("seven")
+                break;
 
             case gridSpace.includes("eight"):
                 i = 8
                 play(i)
                 console.log("eight")
+                break;
+                
         }
 
 
@@ -134,10 +137,7 @@ function setTurn(player) {
 
     function render(btn) {
         const img = document.createElement("img")
-        console.log(_currentTurn)
-        console.log(btn)
         btn.append(img)
-        console.log(_currentTurn.sign)
         if(_currentTurn.sign == "O") {
             img.src = "testcat2.jpg"
 
@@ -154,6 +154,7 @@ function setTurn(player) {
         const result = Math.floor(Math.random() *10 )
         playerTurn(result)
     }
+    
     function playerTurn(result) {
         if(result % 2 == 0) {
             setTurn(playerOne)
@@ -162,7 +163,6 @@ function setTurn(player) {
 
         setTurn(playerTwo)
         }
-        console.log(_currentTurn)
     } 
 
 // checks if spots already taken before applying
@@ -177,6 +177,7 @@ function setTurn(player) {
     }
 
     function addSign(_currentTurn,i) {
+        console.log("addsign")
         gameBoard[i] = _currentTurn.sign
         _currentTurn.moves.push(i)
         console.log(_currentTurn.moves)
@@ -186,16 +187,14 @@ function setTurn(player) {
     }
 
     const winCheck = (arr) => {
-        console.log(`checking win ${arr.name}`)
-        console.log(`checking win ${arr.moves}`)
+        console.log("wincheck")
         const winMoves = [[0,1,2], [0,3,6], [0,4,8],
-        [1,4,7], [2,4,6], [2,5,8],
+        [1,4,7], [2,4,6], [2,5,8],[3,4,5],
         [6,7,8]]
     
         for(let i = 0; i < winMoves.length; i++) {
 
             if(winMoves[i].every(val => arr.moves.includes(val))) {
-                console.log("winner")
                 declareWinner(arr)
                 return
             } 
@@ -208,11 +207,10 @@ function setTurn(player) {
     }
 
     function changeTurn(_currentTurn) {
-        if(_currentTurn === playerOne) {
-            console.log("boop")
+        console.log("changeturn")
+        if(_currentTurn == playerOne) {
             setTurn(playerTwo)
         } else {
-            console.log("beep")
             setTurn(playerOne)
         }
     }
