@@ -45,6 +45,7 @@ function setTurn(player) {
     const img = document.querySelector("img")
     const rdyBtn = document.querySelectorAll(".ready")
     const input = document.querySelector(".input")
+    const board = document.querySelector(".board")
 
 
     // buttons
@@ -83,6 +84,8 @@ function setTurn(player) {
             })
         })
     }
+
+
 
     function nameSetter(playerHeader, nameInput) {
         if(nameInput.className.includes("player-one") 
@@ -174,10 +177,10 @@ function setTurn(player) {
         const img = document.createElement("img")
         btn.append(img)
         if(_currentTurn.sign == "O") {
-            img.src = "testcat2.jpg"
+            img.src = "ellipse-outline.svg"
 
         } else if (_currentTurn.sign == "X"){
-            img.src= "testcat.jpg"
+            img.src= "close-outline.svg"
         }
     }
 
@@ -231,6 +234,9 @@ function setTurn(player) {
 
             if(winMoves[i].every(val => arr.moves.includes(val))) {
                 declareWinner(arr)
+                const boardBtn = board.querySelectorAll("button")
+                console.log(boardBtn)
+                boardBtn.forEach(btn => disableButton(btn))
                 return
             } 
         }   
