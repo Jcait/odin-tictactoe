@@ -41,6 +41,8 @@ let winner = false
 
 let count = 0
 
+let gameBegun = false
+
 function drawCheck() {
     if(winner == false && 
         count == 9) {
@@ -49,6 +51,10 @@ function drawCheck() {
            enableReset()
            resetButton(resetBtn)
         }
+}
+
+function gameStarted() {
+    gameBegun = true
 }
 
 function enableReset() {
@@ -73,6 +79,7 @@ function resetCount() {
     const header = document.querySelector(".header")
     const head =  header.querySelector("h1")
     const resetBtn = document.querySelector(".reset")
+    const nameUndo = document.querySelectorAll(".undo-button")
 
 
     // buttons
@@ -100,7 +107,10 @@ function resetCount() {
     function gameSetup() {
         gameButton(rdyBtn)
         btnStart(startBtn)
+        nameRedo(nameUndo)
     }
+
+
     
     function btnStart(startBtn) {
         startBtn.addEventListener("click", () => {
@@ -145,6 +155,35 @@ function resetCount() {
 
         })
         }
+        function nameRedo(nameUndo) {
+            nameUndo.forEach(btn => {
+            btn.addEventListener("click", () => {
+                let readyBtn = btn.parentNode.parentNode.querySelector(".ready")
+                let playerName = btn.parentNode.parentNode.querySelector("input")
+                let defaultH = btn.parentNode.parentNode.querySelector("h1")
+                if(playerName.className.includes("player-one")) {
+                    playerOne.name = ""
+                    defaultH.innerText = `Player One!`
+                    if(gameBegun){
+                        playerOne.name = "Player One"  
+                    }
+                } else {
+                    defaultH.innerText = `Player Two!`
+                    playerTwo.name = ""
+                    if(gameBegun){
+                        playerTwo.name = "Player Two"  
+                    }
+                }
+                enableButton(readyBtn)
+
+            }) 
+            })
+        }   
+
+
+
+
+    
 
 
 
@@ -187,6 +226,10 @@ function reset() {
 
     function disableButton(button) {
         button.disabled = true
+    }
+
+    function enableButton(button) {
+        button.disabled = false
     }
 
     function renderCheck(btn) {
@@ -274,6 +317,7 @@ function reset() {
 // Starts game and randomly selects starting player
 
     function gameStart() {
+        gameStarted()
         setBtn(btn)
         const result = Math.floor(Math.random() *10 )
         playerTurn(result)
@@ -354,6 +398,8 @@ function reset() {
 
     return {
         gameSetup,
+        playerOne,
+        playerTwo
     }
 
 })()
