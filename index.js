@@ -404,8 +404,6 @@ function reset() {
 
     return {
         gameSetup,
-        playerOne,
-        playerTwo
     }
 
 })()
