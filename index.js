@@ -164,12 +164,14 @@ function resetCount() {
                 if(playerName.className.includes("player-one")) {
                     playerOne.name = ""
                     defaultH.innerText = `Player One!`
+                    playerName.value = ""
                     if(gameBegun){
                         playerOne.name = "Player One"  
                     }
                 } else {
                     defaultH.innerText = `Player Two!`
                     playerTwo.name = ""
+                    playerName.value = ""
                     if(gameBegun){
                         playerTwo.name = "Player Two"  
                     }
@@ -221,7 +223,7 @@ function reset() {
             && nameInput.value != "") {
                 playerHeader.innerText = nameInput.value
                 playerTwo.name = nameInput.value
-        }
+        } nameInput.value = ""
     }
 
     function disableButton(button) {
@@ -366,7 +368,7 @@ function reset() {
             if(winMoves[i].every(val => playMoves.includes(val))) {
                 console.log("winner")
                 setWinner()
-                head.innerText = `${arr.name} has won the round (Please click reset to start a new round)`
+                head.innerText = `${arr.name} has won the round (reset to start a new round)`
                 boardBtn.forEach(btn => disableButton(btn))
                 enableReset()
                 resetButton(resetBtn)
