@@ -112,7 +112,7 @@ function resetCount() {
     function nameCheck(startBtn) {
         if(playerOne.name == "" 
         || playerTwo.name == "") {
-            alert("Please fill in both names")
+            alert("Please fill in both names and press ready")
         } else {
             gameStart()
             disableButton(startBtn)
