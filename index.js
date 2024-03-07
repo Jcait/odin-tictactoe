@@ -46,16 +46,29 @@ function drawCheck() {
         count == 9) {
            head.innerText = `The Game is a tie, please reset the board.`
            console.log("reset")
-           resetBtn.disabled = false
+           enableReset()
            resetButton(resetBtn)
         }
 }
 
+function enableReset() {
+    resetBtn.disabled = false
+}
+
+function disableReset() {
+    resetBtn.disabled = true
+}
+
+function resetCount() {
+    count = 0
+}
+
 // DOM cache
 
-    const btn = document.querySelectorAll("button")
+    const btn = document.querySelectorAll(".tac")
     const rdyBtn = document.querySelectorAll(".ready")
     const board = document.querySelector(".board")
+    const boardBtn = board.querySelectorAll("button")
     const startBtn = document.querySelector(".start")
     const header = document.querySelector(".header")
     const head =  header.querySelector("h1")
@@ -123,8 +136,13 @@ function drawCheck() {
 
     function resetButton(resetBtn) {
         resetBtn.addEventListener("click", () => {
+            console.log("reset")
             reset()
+            resetCount()
             clearBoard(board)
+            disableReset()
+
+
         })
         }
 
@@ -133,7 +151,12 @@ function drawCheck() {
 // Everything else
 function clearBoard(board) {
     boardSquare = board.querySelectorAll("button")
-    boardSquare.forEach(img => img.querySelector("img").remove())
+    const img = board.querySelector("img")
+    boardSquare.forEach(btn => {
+            if(btn.hasChildNodes()) {
+                btn.querySelector("img").remove()
+            }
+    })
     changeTurn(_currentTurn)
 
 }
@@ -143,6 +166,11 @@ function reset() {
     gameBoard = [ "","","",
                  "","","",
                  "","",""]
+    if(winner) {
+        boardBtn.forEach(btn => btn.disabled = false)
+        winner = false
+        announce(_currentTurn.name)
+    }
 }
 
     function nameSetter(playerHeader, nameInput) {
@@ -294,9 +322,10 @@ function reset() {
             if(winMoves[i].every(val => playMoves.includes(val))) {
                 console.log("winner")
                 setWinner()
-                head.innerText = `${arr.name} has won the round (Please refresh the page)`
-                const boardBtn = board.querySelectorAll("button")
+                head.innerText = `${arr.name} has won the round (Please click reset to start a new round)`
                 boardBtn.forEach(btn => disableButton(btn))
+                enableReset()
+                resetButton(resetBtn)
                 return
             } 
         }   
