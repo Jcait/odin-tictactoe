@@ -122,8 +122,8 @@ button:disabled {
 }
 
 .undo {
-    height: 70%;
-    width: 70%;
+    height: 100%;
+    width: 100%;
 
 }
 
@@ -133,6 +133,11 @@ button:disabled {
 }
 h4 {
     margin: 0;
-    font-size: .8em;
+}
+
+.undo-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 16px;
 }
 

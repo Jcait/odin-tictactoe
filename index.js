@@ -33,7 +33,7 @@ let  _currentTurn
 
 function setTurn(player) {
     _currentTurn = player
-    announce(player.name)
+    announce(player)
 
 }
 
@@ -96,12 +96,12 @@ function resetCount() {
         })
     }
 
-    function announce(name) {
+    function announce(turn) {
        const head = header.querySelector("h1")
        if(winner) {
-        head.innerText =`${name} is the winner`
+        head.innerText =`${turn.name} is the winner`
        }
-       head.innerText = `It is ${name}'s turn`
+       head.innerText = `It is ${turn.name} 's turn: "${turn.sign}"`
     }
 
     function gameSetup() {
@@ -135,10 +135,9 @@ function resetCount() {
                 let playerHeader = button.parentNode.querySelector("h1")
                 const nameInput = button.parentNode.querySelector("input")
                 console.log(playerHeader)
-                nameSetter(playerHeader, nameInput)
                 if(nameInput.value) {
                     disableButton(button)
-                }
+                } nameSetter(playerHeader, nameInput)
                 
             })
         })
@@ -166,14 +165,16 @@ function resetCount() {
                     defaultH.innerText = `Player One!`
                     playerName.value = ""
                     if(gameBegun){
-                        playerOne.name = "Player One"  
+                        playerOne.name = "Player One" 
+                        announce(_currentTurn) 
                     }
                 } else {
                     defaultH.innerText = `Player Two!`
                     playerTwo.name = ""
                     playerName.value = ""
                     if(gameBegun){
-                        playerTwo.name = "Player Two"  
+                        playerTwo.name = "Player Two" 
+                        announce(_currentTurn) 
                     }
                 }
                 enableButton(readyBtn)
@@ -210,7 +211,7 @@ function reset() {
     if(winner) {
         boardBtn.forEach(btn => btn.disabled = false)
         winner = false
-        announce(_currentTurn.name)
+        announce(_currentTurn)
     }
 }
 
@@ -224,7 +225,10 @@ function reset() {
                 playerHeader.innerText = nameInput.value
                 playerTwo.name = nameInput.value
         } nameInput.value = ""
-    }
+        if(gameBegun) {
+            announce(_currentTurn)
+        }
+    } 
 
     function disableButton(button) {
         button.disabled = true
